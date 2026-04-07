@@ -1,0 +1,667 @@
+/* =========================
+   Adopta Cuatro Patas - CSS Global
+   Paleta editable en :root
+========================= */
+
+:root {
+    /* Colores base */
+    --color-primario: #6D28D9;
+    /* Morado */
+    --color-primario-2: #4C1D95;
+    /* Morado oscuro */
+    --color-acento: #22C55E;
+    /* Verde */
+    --color-acento-2: #F59E0B;
+    /* Ámbar */
+
+    /* Fondos y texto */
+    --fondo: #F7F4FF;
+    --superficie: #FFFFFF;
+    --texto: #1F2937;
+    --muted: #6B7280;
+
+    /* Bordes y sombras */
+    --borde: #E5E7EB;
+    --borde-morado: rgba(109, 40, 217, 0.25);
+    --linea-tabla: rgba(76, 29, 149, 0.35);
+    /* líneas moradas suaves */
+    --sombra: 0 10px 24px rgba(17, 24, 39, 0.10);
+    --sombra-suave: 0 6px 14px rgba(17, 24, 39, 0.08);
+
+    /* Radio */
+    --r-xl: 18px;
+    --r-lg: 14px;
+    --r-md: 12px;
+
+    /* Layout */
+    --max-ancho: 1200px;
+}
+
+/* =========================
+   Reset básico + layout sticky footer
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--texto);
+
+    background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(109, 40, 217, 0.18), transparent 60%),
+        radial-gradient(900px 400px at 100% 0%, rgba(245, 158, 11, 0.12), transparent 55%),
+        var(--fondo);
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    max-width: var(--max-ancho);
+    margin: 0 auto;
+    padding: 22px 16px;
+    flex: 1;
+    /* empuja el footer abajo */
+}
+
+/* Utilidad */
+.muted {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* =========================
+   Header / Nav / Footer
+========================= */
+header {
+    background: linear-gradient(135deg, var(--color-primario), var(--color-primario-2));
+    color: #fff;
+    padding: 18px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--sombra-suave);
+}
+
+header h1 {
+    margin: 0 0 12px 0;
+    font-size: 1.65rem;
+    letter-spacing: 0.2px;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+footer {
+    background: #111827;
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    margin-top: 26px;
+}
+
+/* =========================
+   Botones
+========================= */
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+    filter: brightness(1.02);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Botones nav */
+nav button {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+nav button:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.btn-primario {
+    background: var(--color-primario);
+    color: #fff;
+}
+
+.btn-primario:hover {
+    filter: brightness(1.05);
+}
+
+.btn-secundario {
+    background: rgba(109, 40, 217, 0.10);
+    color: var(--color-primario-2);
+    border: 1px solid var(--borde-morado);
+}
+
+.btn-peligro {
+    background: #EF4444;
+    color: #fff;
+}
+
+/* =========================
+   Bloques comunes (tarjetas, títulos, centrado)
+========================= */
+.pagina-formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-titulo {
+    text-align: center;
+    color: var(--color-primario-2);
+    margin-bottom: 20px;
+}
+
+/* Tarjeta genérica */
+.tarjeta-formulario {
+    width: 100%;
+    max-width: 620px;
+    background: linear-gradient(180deg, rgba(109, 40, 217, 0.10), rgba(207, 203, 203, 0.98) 45%);
+    border: 1px solid rgba(109, 40, 217, 0.22);
+    box-shadow: var(--sombra);
+    border-radius: var(--r-xl);
+    padding: 16px;
+}
+
+/* Mensajes */
+.mensaje-ok {
+    max-width: 980px;
+    width: 100%;
+    background: rgba(34, 197, 94, 0.10);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    padding: 10px 12px;
+    border-radius: 14px;
+}
+
+.mensaje-error {
+    max-width: 980px;
+    width: 100%;
+    background: rgba(239, 68, 68, 0.10);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    padding: 10px 12px;
+    border-radius: 14px;
+}
+
+/* =========================
+   Formularios
+========================= */
+form {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--r-xl);
+    padding: 16px;
+    box-shadow: var(--sombra-suave);
+    max-width: 680px;
+}
+
+.formulario-admin {
+    max-width: 600px;
+    margin-bottom: 22px;
+}
+
+.form-grupo {
+    margin-bottom: 12px;
+}
+
+fieldset {
+    border: 1px solid var(--borde);
+    border-radius: var(--r-lg);
+    padding: 14px;
+    margin: 0 0 14px 0;
+    background: linear-gradient(180deg, rgba(109, 40, 217, 0.05), transparent 55%);
+}
+
+legend {
+    font-weight: 900;
+    color: var(--color-primario-2);
+    padding: 0 8px;
+}
+
+label {
+    font-weight: 700;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background: #fff;
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: rgba(109, 40, 217, 0.55);
+    box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.nota-admin {
+    margin-top: 0;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* Vista previa imagen (edit) */
+.vista-previa {
+    margin-top: 10px;
+}
+
+.img-previa {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    display: block;
+    margin-top: 8px;
+}
+
+/* =========================
+   Index - Tarjetas (4 columnas PC)
+========================= */
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.tarjeta-perro {
+    background: linear-gradient(180deg, rgba(109, 40, 217, 0.07), rgba(255, 255, 255, 0.92) 40%);
+    border: 1px solid var(--borde-morado);
+    border-radius: var(--r-xl);
+    padding: 14px;
+    box-shadow: var(--sombra-suave);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.tarjeta-perro::before {
+    content: "";
+    position: absolute;
+    inset: -60px -60px auto auto;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, 0.28), transparent 60%);
+    transform: rotate(12deg);
+}
+
+.tarjeta-perro:hover {
+    box-shadow: var(--sombra);
+    transform: translateY(-2px);
+}
+
+.tarjeta-perro img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--borde);
+    display: block;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.tarjeta-perro h3 {
+    margin: 8px 0 6px 0;
+    font-size: 1.15rem;
+    color: var(--color-primario-2);
+}
+
+.tarjeta-perro p {
+    margin: 6px 0;
+    line-height: 1.25rem;
+}
+
+.tarjeta-perro .btn-adoptar {
+    width: 100%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-primario-2));
+    color: #fff;
+}
+
+/* Estado en index (si lo usas) */
+.etiqueta-estado {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    margin-top: 8px;
+    border: 1px solid var(--borde);
+    background: rgba(229, 231, 235, 0.55);
+}
+
+.estado-disponible {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.25);
+}
+
+.estado-reservado {
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+.estado-adoptado {
+    background: rgba(107, 114, 128, 0.12);
+    border-color: rgba(107, 114, 128, 0.25);
+}
+
+.estado-baja {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* =========================
+   Tablas (admin) - rejilla completa sin bordes redondeados
+========================= */
+.tabla-wrapper {
+    width: 100%;
+    overflow-x: visible;
+}
+
+/* Base común para todas las tablas de admin */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--superficie);
+    border: 1px solid var(--linea-tabla);
+    box-shadow: var(--sombra-suave);
+    border-radius: 0;
+    /* SIN redondeo */
+    overflow: visible;
+    /* SIN recortes */
+}
+
+th,
+td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+
+    /* rejilla completa */
+    border: 1px solid var(--linea-tabla);
+}
+
+th {
+    background: rgba(109, 40, 217, 0.10);
+    color: var(--color-primario-2);
+    font-weight: 900;
+}
+
+tbody tr:nth-child(even) td {
+    background: rgba(109, 40, 217, 0.03);
+}
+
+tbody tr:hover td {
+    background: rgba(109, 40, 217, 0.06);
+}
+
+.tabla-foto {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+}
+
+/* =========================
+   Badges y links acción
+========================= */
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.badge-morado {
+    background: rgba(109, 40, 217, 0.12);
+    border-color: rgba(109, 40, 217, 0.22);
+    color: var(--color-primario-2);
+}
+
+.badge-menta,
+.badge-ok {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.22);
+    color: #065F46;
+}
+
+.badge-off {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.22);
+    color: #7F1D1D;
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.25);
+    color: #92400E;
+}
+
+.link-accion {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    background: rgba(109, 40, 217, 0.10);
+    color: var(--color-primario-2);
+    border: 1px solid rgba(109, 40, 217, 0.20);
+}
+
+.link-accion:hover {
+    filter: brightness(1.02);
+}
+
+/* =========================
+   Panel de control (admin)
+========================= */
+.panel-contenedor {
+    max-width: 560px;
+    padding: 30px 35px;
+    margin-top: 25px;
+    margin-bottom: 40px;
+
+    border-radius: 22px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(109, 40, 217, 0.18);
+    background: linear-gradient(180deg, rgba(109, 40, 217, 0.08), rgba(207, 203, 203, 0.98) 45%);
+}
+
+.panel-info {
+    margin-top: 0;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.panel-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-botones a {
+    text-decoration: none;
+    display: block;
+}
+
+.panel-botones button {
+    width: 100%;
+}
+
+/* =========================
+   Ver peticiones (admin)
+========================= */
+.peticiones-nav {
+    max-width: 520px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.peticiones-nav a {
+    text-decoration: none;
+    display: block;
+}
+
+.peticiones-nav button {
+    width: 100%;
+    min-width: 170px;
+}
+
+.acciones-inline {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.acciones-inline form {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    max-width: none;
+}
+
+/* =========================
+   Banner sección Quiénes somos
+========================= */
+.banner-quienes {
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-quienes img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .banner-quienes img {
+        height: 260px;
+    }
+}
+
+/* =========================
+   Responsive (usuario)
+========================= */
+@media (max-width: 1200px) {
+    .contenedor-tarjetas {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .contenedor-tarjetas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav a,
+    nav button,
+    button {
+        width: 100%;
+    }
+
+    main {
+        padding: 14px 12px;
+    }
+
+    .contenedor-tarjetas {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .tarjeta-perro {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .tarjeta-formulario {
+        max-width: 420px;
+    }
+}
+
+
+.tabla-admin,
+.tabla-usuarios,
+.tabla-animales,
+.tabla-peticiones {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    /* importante */
+}
+
+.panel-contenedor {
+    width: 100%;
+    box-sizing: border-box;
+}

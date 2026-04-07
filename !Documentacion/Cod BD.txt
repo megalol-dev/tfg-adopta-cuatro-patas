@@ -1,0 +1,100 @@
+
+// Documentacion tecnica para el profesor
+// Como se creo la base datos en SQLite
+
+
+-- ===============================
+--  Base de datos 
+-- ===============================
+
+PRAGMA foreign_keys = ON;
+
+-- -------------------------------
+-- 1) Usuarios internos (gestión)
+--    (gerente y ayudantes)
+-- -------------------------------
+CREATE TABLE IF NOT EXISTS usuarios_internos (
+  id_usuario        INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario           TEXT NOT NULL UNIQUE,
+  contrasena_hash   TEXT NOT NULL,                -- guardar hash, no contraseña en claro
+  nombre_completo   TEXT,
+  correo            TEXT,
+  rol               TEXT NOT NULL DEFAULT 'ayudante'
+                    CHECK (rol IN ('gerente','ayudante')),
+  activo            INTEGER NOT NULL DEFAULT 1,   -- 1=activo, 0=inactivo
+  creado_en         TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- (Opcional) Usuario gerente inicial: cambia el usuario y el hash
+INSERT OR IGNORE INTO usuarios_internos
+(id_usuario, usuario, contrasena_hash, nombre_completo, correo, rol, activo)
+VALUES
+(1, 'gerente', 'CAMBIAR_HASH', 'Gerente', 'gerente@local', 'gerente', 1);
+
+-- -------------------------------
+-- 2) Perros (animales)
+-- -------------------------------
+CREATE TABLE IF NOT EXISTS perros (
+  id_perro      INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre        TEXT NOT NULL,
+  raza          TEXT NOT NULL,
+  edad_anios    INTEGER NOT NULL CHECK (edad_anios >= 0 AND edad_anios <= 40),
+  descripcion   TEXT,
+  estado        TEXT NOT NULL DEFAULT 'disponible'
+                CHECK (estado IN ('disponible','adoptado','reservado','baja')),
+  creado_por    INTEGER,                          -- usuario interno que lo publicó
+  creado_en     TEXT NOT NULL DEFAULT (datetime('now')),
+  actualizado_en TEXT,
+  FOREIGN KEY (creado_por) REFERENCES usuarios_internos(id_usuario)
+);
+
+-- -------------------------------
+-- 3) Solicitudes (formularios)
+--    La gente rellena esto para adoptar
+-- -------------------------------
+CREATE TABLE IF NOT EXISTS solicitudes_adopcion (
+  id_solicitud   INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_perro       INTEGER NOT NULL,
+  nombre         TEXT NOT NULL,
+  apellidos      TEXT NOT NULL,
+  dni            TEXT NOT NULL,
+  telefono       TEXT NOT NULL,
+  correo         TEXT NOT NULL,
+  mensaje        TEXT,
+  estado         TEXT NOT NULL DEFAULT 'pendiente'
+                 CHECK (estado IN ('pendiente','en_contacto','aprobada','rechazada','cerrada')),
+  creada_en      TEXT NOT NULL DEFAULT (datetime('now')),
+  gestionada_por INTEGER,                         -- usuario interno que la gestiona (opcional)
+  FOREIGN KEY (id_perro) REFERENCES perros(id_perro) ON DELETE CASCADE,
+  FOREIGN KEY (gestionada_por) REFERENCES usuarios_internos(id_usuario)
+);
+
+-- -------------------------------
+-- 4) Adoptantes (dueños finales)
+--    Se guarda cuando se confirma adopción
+-- -------------------------------
+CREATE TABLE IF NOT EXISTS adoptantes (
+  id_adoptante  INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre        TEXT NOT NULL,
+  apellidos     TEXT NOT NULL,
+  dni           TEXT NOT NULL UNIQUE,
+  telefono      TEXT NOT NULL,
+  correo        TEXT NOT NULL,
+  creado_en     TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- -------------------------------
+-- 5) Adopciones (relación perro-dueño)
+--    Un perro solo puede tener una adopción
+-- -------------------------------
+CREATE TABLE IF NOT EXISTS adopciones (
+  id_adopcion    INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_perro       INTEGER NOT NULL UNIQUE,
+  id_adoptante   INTEGER NOT NULL,
+  id_solicitud   INTEGER,                         -- opcional: solicitud aprobada asociada
+  adoptado_en    TEXT NOT NULL DEFAULT (datetime('now')),
+  notas          TEXT,
+  FOREIGN KEY (id_perro) REFERENCES perros(id_perro),
+  FOREIGN KEY (id_adoptante) REFERENCES adoptantes(id_adoptante),
+  FOREIGN KEY (id_solicitud) REFERENCES solicitudes_adopcion(id_solicitud)
+);

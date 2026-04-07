@@ -1,0 +1,9 @@
+// Se utiliza PHP como server, asi que en visual estudio
+-> abre la consola pulsando las teclas control + ñ
+-> escribe en la terminal -> php -S localhost:8000
+-> te dara una URL -> http://localhost:8000
+-> doble click en esa URL y estaras dentro
+
+
+// Para entrar en la zona del admin, login
+->  http://localhost:8000/admin/iniciar_sesion.php
