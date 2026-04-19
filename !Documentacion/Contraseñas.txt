@@ -1,6 +1,9 @@
 // Estas contraseñas estan aqui por un motivo meramente didactico, en una app web real, jamás se guardiran aqui las contraseñas, ya que pueden ser robadas y mal usadas por usuarios no deseados.
 
 
+// Para entrar en la zona del admin, login
+->  http://localhost:8000/admin/iniciar_sesion.php
+
 // Usuario maestro (root)
 Usuario ->  admin_maestro
 Pass    ->  1234567890
